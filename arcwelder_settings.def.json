@@ -7,185 +7,182 @@
         "default_value": false,
         "settable_per_mesh": false,
         "settable_per_extruder": false,
+        "settable_per_meshgroup": false
+    },
+    "arcwelder_g90_influences_extruder":
+    {
+        "label": "G90 Influences Extruder",
+        "description": "G90/G91 influences the extruder axis mode in the conversion of linear to arc moves. Marlin 2.0 and forks should have this box checked.  Many forks of Marlin 1.x should have this unchecked, like the Prusa MK2 and MK3.",
+        "type": "bool",
+        "default_value": false,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
         "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable"
+    },
+    "arcwelder_resolution":
+    {
+        "label": "Resolution (Maximum Path Deviation)",
+        "description": "The resolution in mm of the of the output.  Determines the maximum tool path deviation allowed in the conversion of linear to arc moves.",
+        "unit": "mm",
+        "type": "float",
+        "default_value": 0.05,
+        "minimum_value": 0.001,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable"
+    },
+    "arcwelder_tolerance":
+    {
+        "label": "Path Tolerance",
+        "description": "The maximum allowable difference between the arc path and the original toolpath in the conversion of linear to arc moves.",
+        "unit": "%",
+        "type": "float",
+        "default_value": 5,
+        "minimum_value": 0,
+        "maximum_value": 100,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable"
+    },
+    "arcwelder_maximum_radius":
+    {
+        "label": "Maximum Arc Radius",
+        "description": "The maximum radius of any arc in mm.",
+        "unit": "mm",
+        "type": "float",
+        "default_value": 9999,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable"
+    },
+    "arcwelder_allow_3d_arcs":
+    {
+        "label": "Allow 3D Arcs",
+        "description": "Allow 3d arcs, supporting Spiralize Outer Contour (vase mode). This has been supported in Marlin since 2.0.8, however other firmware may not support this.",
+        "type": "bool",
+        "default_value": false,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable and magic_spiralize"
+    },
+    "arcwelder_allow_travel_arcs":
+    {
+        "label": "Allow Travel Arcs",
+        "description": "Allow converting travel moves to arcs. This is not necessary for print quality, but in rare cases it can avoid stutters on complex travel moves.",
+        "type": "bool",
+        "default_value": false,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable"
+    },
+    "arcwelder_allow_dynamic_precision":
+    {
+        "label": "Allow Dynamic Precision",
+        "description": "Allow the precision to grow as ArcWelder encounters gcodes with higher precision. This may increase gcode size somewhat, depending on the precision of the gcode commands in your file.",
+        "type": "bool",
+        "default_value": false,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable"
+    },
+    "arcwelder_default_xyz_precision":
+    {
+        "label": "Default XYZ Precision",
+        "description": "The number of decimal places of coordinates of arc segments in the X, Y and Z axes. When combined with the 'Allow Dynamic Precision' setting, this represents the minimum precision.",
+        "type": "int",
+        "default_value": 3,
+        "minimum_value": 0,
+        "minimum_value_warning": 2,
+        "maximum_value_warning": 6,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable and False"
+    },
+    "arcwelder_default_e_precision":
+    {
+        "label": "Default E Precision",
+        "description": "The number of decimal places of coordinates of arc segments in the E axis. When combined with the 'Allow Dynamic Precision' setting, this represents the minimum precision.",
+        "type": "int",
+        "default_value": 5,
+        "minimum_value": 0,
+        "minimum_value_warning": 2,
+        "maximum_value_warning": 6,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable and False"
+    },
+    "arcwelder_firmware_compensation":
+    {
+        "label": "Firmware Compensation",
+        "description": "Some firmware does not handle arcs with a small radius (under approximately 5mm depending on your settings), which will appear flat instead of curved. If larger arcs appear flat, it's likely that G2/G3 is disabled. This applies to Marlin 1.x (but NOT Marlin 2), Klipper (can be fixed by changing settings), and a few others. If you notice small radius arcs that print with a flat edge, you may need to enable firmware compensation. Note that compression may be reduced (perhaps drastically) when firmware compensation is enabled.",
+        "type": "bool",
+        "default_value": false,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable",
         "children":
         {
-            "arcwelder_g90_influences_extruder":
+            "arcwelder_mm_per_arc_segment":
             {
-                "label": "G90 Influences Extruder",
-                "description": "G90/G91 influences the extruder axis mode in the conversion of linear to arc moves. Marlin 2.0 and forks should have this box checked.  Many forks of Marlin 1.x should have this unchecked, like the Prusa MK2 and MK3.",
-                "type": "bool",
-                "default_value": false,
-                "settable_per_mesh": false,
-                "settable_per_extruder": false,
-                "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable"
-            },
-            "arcwelder_resolution":
-            {
-                "label": "Resolution (Maximum Path Deviation)",
-                "description": "The resolution in mm of the of the output.  Determines the maximum tool path deviation allowed in the conversion of linear to arc moves.",
+                "label": "Millimeters Per Arc Segment",
+                "description": "The mm per arc segment as defined in your firmware. Used to compensate for firmware without mini-arc-segments setting.",
                 "unit": "mm",
                 "type": "float",
-                "default_value": 0.05,
-                "minimum_value": 0.001,
-                "settable_per_mesh": false,
-                "settable_per_extruder": false,
-                "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable"
-            },
-            "arcwelder_tolerance":
-            {
-                "label": "Path Tolerance",
-                "description": "The maximum allowable difference between the arc path and the original toolpath in the conversion of linear to arc moves.",
-                "unit": "%",
-                "type": "float",
-                "default_value": 5,
+                "default_value": 1.0,
                 "minimum_value": 0,
-                "maximum_value": 100,
                 "settable_per_mesh": false,
                 "settable_per_extruder": false,
                 "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable"
+                "enabled": "arcwelder_enable and arcwelder_firmware_compensation"
             },
-            "arcwelder_maximum_radius":
+            "arcwelder_min_arc_segment":
             {
-                "label": "Maximum Arc Radius",
-                "description": "The maximum radius of any arc in mm.",
-                "unit": "mm",
-                "type": "float",
-                "default_value": 9999,
-                "settable_per_mesh": false,
-                "settable_per_extruder": false,
-                "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable"
-            },
-            "arcwelder_allow_3d_arcs":
-            {
-                "label": "Allow 3D Arcs",
-                "description": "Allow 3d arcs, supporting Spiralize Outer Contour (vase mode). This has been supported in Marlin since 2.0.8, however other firmware may not support this.",
-                "type": "bool",
-                "default_value": false,
-                "settable_per_mesh": false,
-                "settable_per_extruder": false,
-                "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable and magic_spiralize"
-            },
-            "arcwelder_allow_travel_arcs":
-            {
-                "label": "Allow Travel Arcs",
-                "description": "Allow converting travel moves to arcs. This is not necessary for print quality, but in rare cases it can avoid stutters on complex travel moves.",
-                "type": "bool",
-                "default_value": false,
-                "settable_per_mesh": false,
-                "settable_per_extruder": false,
-                "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable"
-            },
-            "arcwelder_allow_dynamic_precision":
-            {
-                "label": "Allow Dynamic Precision",
-                "description": "Allow the precision to grow as ArcWelder encounters gcodes with higher precision. This may increase gcode size somewhat, depending on the precision of the gcode commands in your file.",
-                "type": "bool",
-                "default_value": false,
-                "settable_per_mesh": false,
-                "settable_per_extruder": false,
-                "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable"
-            },
-            "arcwelder_default_xyz_precision":
-            {
-                "label": "Default XYZ Precision",
-                "description": "The number of decimal places of coordinates of arc segments in the X, Y and Z axes. When combined with the 'Allow Dynamic Precision' setting, this represents the minimum precision.",
+                "label": "Minimum Circle Segments",
+                "description": "The minimum number of segments in a full circle of the same radius as any given arc. Used to compensate for firmware without min-arc-segments setting.",
                 "type": "int",
-                "default_value": 3,
-                "minimum_value": 0,
-                "minimum_value_warning": 2,
-                "maximum_value_warning": 6,
-                "settable_per_mesh": false,
-                "settable_per_extruder": false,
-                "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable and False"
-            },
-            "arcwelder_default_e_precision":
-            {
-                "label": "Default E Precision",
-                "description": "The number of decimal places of coordinates of arc segments in the E axis. When combined with the 'Allow Dynamic Precision' setting, this represents the minimum precision.",
-                "type": "int",
-                "default_value": 5,
-                "minimum_value": 0,
-                "minimum_value_warning": 2,
-                "maximum_value_warning": 6,
-                "settable_per_mesh": false,
-                "settable_per_extruder": false,
-                "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable and False"
-            },
-            "arcwelder_firmware_compensation":
-            {
-                "label": "Firmware Compensation",
-                "description": "Some firmware does not handle arcs with a small radius (under approximately 5mm depending on your settings), which will appear flat instead of curved. If larger arcs appear flat, it's likely that G2/G3 is disabled. This applies to Marlin 1.x (but NOT Marlin 2), Klipper (can be fixed by changing settings), and a few others. If you notice small radius arcs that print with a flat edge, you may need to enable firmware compensation. Note that compression may be reduced (perhaps drastically) when firmware compensation is enabled.",
-                "type": "bool",
-                "default_value": false,
-                "settable_per_mesh": false,
-                "settable_per_extruder": false,
-                "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable",
-                "children":
-                {
-                    "arcwelder_mm_per_arc_segment":
-                    {
-                        "label": "Millimeters Per Arc Segment",
-                        "description": "The mm per arc segment as defined in your firmware. Used to compensate for firmware without mini-arc-segments setting.",
-                        "unit": "mm",
-                        "type": "float",
-                        "default_value": 1.0,
-                        "minimum_value": 0,
-                        "settable_per_mesh": false,
-                        "settable_per_extruder": false,
-                        "settable_per_meshgroup": false,
-                        "enabled": "arcwelder_enable and arcwelder_firmware_compensation"
-                    },
-                    "arcwelder_min_arc_segment":
-                    {
-                        "label": "Minimum Circle Segments",
-                        "description": "The minimum number of segments in a full circle of the same radius as any given arc. Used to compensate for firmware without min-arc-segments setting.",
-                        "type": "int",
-                        "default_value": 72,
-                        "minimum_value": 0,
-                        "settable_per_mesh": false,
-                        "settable_per_extruder": false,
-                        "settable_per_meshgroup": false,
-                        "enabled": "arcwelder_enable and arcwelder_firmware_compensation"
-                    }
-                }
-            },
-            "arcwelder_extrusion_rate_variance":
-            {
-                "label": "Extrusion Rate Variance",
-                "description": "Abort arc generation if the extrusion rate changes more than the percent specified. This enhances quality and provides support for Cura Arachne engine with variable line width. Enter 0% to disable.",
-                "unit": "%",
-                "type": "float",
-                "default_value": 5,
-                "minimum_value": 0,
-                "maximum_value": 100,
-                "settable_per_mesh": false,
-                "settable_per_extruder": false,
-                "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable"
-            },
-            "arcwelder_max_gcode_length":
-            {
-                "label": "Maximum G-code Length",
-                "description": "Terminate arc generation if the resulting gcode contains more characters than this setting. Some firmware have issues with long gocde commands. Enter 0 for no limit.",
-                "type": "int",
-                "default_value": 0,
+                "default_value": 72,
                 "minimum_value": 0,
                 "settable_per_mesh": false,
                 "settable_per_extruder": false,
                 "settable_per_meshgroup": false,
-                "enabled": "arcwelder_enable"
+                "enabled": "arcwelder_enable and arcwelder_firmware_compensation"
             }
         }
+    },
+    "arcwelder_extrusion_rate_variance":
+    {
+        "label": "Extrusion Rate Variance",
+        "description": "Abort arc generation if the extrusion rate changes more than the percent specified. This enhances quality and provides support for Cura Arachne engine with variable line width. Enter 0% to disable.",
+        "unit": "%",
+        "type": "float",
+        "default_value": 5,
+        "minimum_value": 0,
+        "maximum_value": 100,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable"
+    },
+    "arcwelder_max_gcode_length":
+    {
+        "label": "Maximum G-code Length",
+        "description": "Terminate arc generation if the resulting gcode contains more characters than this setting. Some firmware have issues with long gocde commands. Enter 0 for no limit.",
+        "type": "int",
+        "default_value": 0,
+        "minimum_value": 0,
+        "settable_per_mesh": false,
+        "settable_per_extruder": false,
+        "settable_per_meshgroup": false,
+        "enabled": "arcwelder_enable"
     }
 }
