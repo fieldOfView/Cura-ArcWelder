@@ -2,7 +2,7 @@
     "arcwelder_enable":
     {
         "label": "Arc Welder",
-        "description": "Convert multiple G0/G1 arc segments into G2/G3 arc movements.",
+        "description": "Convert multiple G0/G1 arc segments into G2/G3 arc movements. This reduces the amount of G-code to be sent and processed and helps to prevent stuttering and zits.",
         "type": "bool",
         "default_value": false,
         "settable_per_mesh": false,
@@ -62,7 +62,7 @@
     "arcwelder_allow_3d_arcs":
     {
         "label": "Allow 3D Arcs",
-        "description": "Allow 3d arcs, supporting Spiralize Outer Contour (vase mode). Not all firmware supports this.",
+        "description": "Allow 3d arcs, supporting Spiralize Outer Contour (vase mode). This has been supported in Marlin since 2.0.8, however other firmware may not support this.",
         "type": "bool",
         "default_value": false,
         "settable_per_mesh": false,
@@ -73,7 +73,7 @@
     "arcwelder_allow_travel_arcs":
     {
         "label": "Allow Travel Arcs",
-        "description": "Allow converting travel moves to arcs.",
+        "description": "Allow converting travel moves to arcs. This is not necessary for print quality, but in rare cases it can avoid stutters on complex travel moves.",
         "type": "bool",
         "default_value": false,
         "settable_per_mesh": false,
@@ -147,10 +147,10 @@
             },
             "arcwelder_min_arc_segment":
             {
-                "label": "Minimum Arc Segments",
+                "label": "Minimum Circle Segments",
                 "description": "The minimum number of segments in a full circle of the same radius as any given arc. Used to compensate for firmware without min-arc-segments setting.",
                 "type": "int",
-                "default_value": 12,
+                "default_value": 72,
                 "minimum_value": 0,
                 "settable_per_mesh": false,
                 "settable_per_extruder": false,
